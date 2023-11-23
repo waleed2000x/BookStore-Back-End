@@ -54,7 +54,6 @@ exports.createBooks = async (req, res) => {
 
 exports.updateBook = async (req, res) => {
   try {
-    // const id = req.params.id;
     const updatedBook = await Modal.findByIdAndUpdate(req.params.id, req.body);
 
     res.status(201).json({
