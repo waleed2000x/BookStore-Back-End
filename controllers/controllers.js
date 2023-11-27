@@ -2,12 +2,27 @@ const Modal = require("./../modal/modal");
 
 exports.getBooks = async (req, res) => {
   try {
-    const allBooks = await Modal.find().select("-__v");
+    const queryObj = { ...req.query };
+    let excludedFields = ["sort", "fields"];
+    excludedFields.forEach((el) => delete queryObj[el]);
+
+    let queryStr = JSON.stringify(queryObj);
+    queryStr = queryStr.split(",").join(" ");
+
+    let mongooseQuery = Modal.find(JSON.parse(queryStr)).select("-__v");
+
+    if (req.query.sort) {
+      let sortBy = req.query.sort.split(",").join(" ");
+      mongooseQuery = mongooseQuery.sort(sortBy);
+    }
+
+    const allBooks = await mongooseQuery;
     res.status(200).json({
       status: "success",
       allBooks,
     });
   } catch (error) {
+    console.log(error);
     res.status(400).json({
       status: "Failed",
       Error: {
