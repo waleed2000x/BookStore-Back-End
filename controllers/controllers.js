@@ -48,6 +48,7 @@ exports.getBook = async (req, res) => {
     });
   }
 };
+
 exports.createBooks = async (req, res) => {
   try {
     const newBook = await Modal.create(req.body);
