@@ -7,7 +7,7 @@ const app = express();
 
 dotenv.config({ path: "./config.env" });
 const corsOptions = {
-  origin: "https://book-haven-hub.vercel.app/",
+  origin: "https://book-haven-hub.vercel.app",
   credentials: false, // if you are using cookies or authentication headers
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
 };
