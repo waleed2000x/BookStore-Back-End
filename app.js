@@ -6,14 +6,8 @@ const router = require("./routes/routes");
 const app = express();
 
 dotenv.config({ path: "./config.env" });
-const corsOptions = {
-  //   origin: ["https://book-haven-hub.vercel.app", "http://localhost:5173"],
-  origin: ["*"],
-  credentials: false, // if you are using cookies or authentication headers
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-};
 
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
 app.use(morgan("dev"));
 app.use("/books", router);
